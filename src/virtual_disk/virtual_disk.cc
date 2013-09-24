@@ -19,7 +19,7 @@
  *
  */
 
-#include "virtual_disk.h"
+#include "virtual_disk/virtual_disk.h"
 
 virtual_disk::virtual_disk(const char* disk_name, size_t num_pages)
     : num_pages_( num_pages ), disk_name_( const_cast<char*>(disk_name) )

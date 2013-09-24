@@ -1,3 +1,6 @@
+#ifndef _FRAME_DESC_H_
+#define _FRAME_DESC_H_
+
 /**
  * @file 
  * @author Ryan Tu <tutuhuagong@gmail.com>
@@ -19,33 +22,20 @@
  *
  * @section DESCRIPTION
  *
- * test virtual disk.
+ * This file contains abstraction for frame entry of hash table.
  */
  
-#include <iostream>
-
 #include "common/sys_defs.h"
-#include "virtual_disk/page.h"
-#include "virtual_disk/virtual_disk.h"
 
-int test_virtual_disk()
+class frame_desc
 {
-    virtual_disk vd("test", 1024);
-    Page page;
-    for (int i = 0; i < PAGESIZE; i++) {
-      page.data[i] = i % 26 + 'a';
-    }
-    vd.write_page(0, &page);
+public:
+    frame_desc();
+    ~frame_desc();
+public:
+    PageId page_id_;
+    int prev_frame_no_;
+    int next_frame_no_;
+};
 
-    Page outpage;
-    vd.read_page(0, &outpage);
-    for (int i = 0; i < PAGESIZE; i++) {
-      if (outpage.data[i] != i % 26 + 'a') {
-          std::cout<<"error reading"<<std::endl;
-      } 
-    }
-
-    return 0;
-}
-
-
+#endif

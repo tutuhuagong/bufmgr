@@ -33,8 +33,8 @@
 #include <fcntl.h>
 
 #include "common/sys_defs.h"
-#include "io_wrapper.h"
-#include "page.h"
+#include "io/io_wrapper.h"
+#include "virtual_disk/page.h"
 
 class virtual_disk
 {

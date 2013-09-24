@@ -34,7 +34,8 @@ BIN_DIR			= $(TOP_DIR)/bin
 		-I$(SRC_DIR)/main
 # INCLUDES = $(shell find $(SRC_DIR) -type d | sed 's\^\-I\' | sed '$ ! s/$/ \\/') 
 HEADERS 		= $(shell find $(TOP_DIR) -name *.h -print)
-INCLUDES                = $(shell find $(SRC_DIR) -type d | sed 's\^\-I\' ) 
+# INCLUDES                = $(shell find $(SRC_DIR) -type d | sed 's\^\-I\' ) 
+INCLUDES                = -I$(SRC_DIR)
 SRCS			= $(shell find $(TOP_DIR) -name *.cc -print) 
 OBJS			= $(patsubst %.cc, %.o, $(SRCS))
 DFILES			= $(patsubst %.cc, %.d, $(SRCS))
@@ -63,12 +64,11 @@ $(MAIN_TRAGET): $(OBJS)
 	$(RM) $@.123;
 
 clean:
-	-$(RM) $(MAIN_TARGET)
+	-$(RM) -R $(BIN_DIR)
 	-$(RM) $(shell find $(TOP_DIR) -name *~ )
 .PHONY: clean
 
 clear: clean
-	-$(RM) -R $(BIN_DIR)
 	-$(RM) $(DFILES) $(OBJS)
 .PHONY: clear
 

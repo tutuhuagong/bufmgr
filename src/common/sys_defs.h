@@ -8,5 +8,6 @@
 #define PAGESIZE 1024
 
 typedef int PageId;
+extern const int INVALID_PAGEID;
 
 #endif

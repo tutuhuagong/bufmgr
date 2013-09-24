@@ -1,3 +1,6 @@
+#ifndef _HASH_TABLE_H_
+#define _HASH_TABLE_H_
+
 /**
  * @file 
  * @author Ryan Tu <tutuhuagong@gmail.com>
@@ -19,33 +22,25 @@
  *
  * @section DESCRIPTION
  *
- * test virtual disk.
+ * 
  */
  
-#include <iostream>
+#include "bufmgr/frame_desc.h"
 
-#include "common/sys_defs.h"
-#include "virtual_disk/page.h"
-#include "virtual_disk/virtual_disk.h"
+class hash_table {
+public:
+  hash_table ();
+  virtual ~hash_table ();
 
-int test_virtual_disk()
-{
-    virtual_disk vd("test", 1024);
-    Page page;
-    for (int i = 0; i < PAGESIZE; i++) {
-      page.data[i] = i % 26 + 'a';
-    }
-    vd.write_page(0, &page);
+  int hash(PageId page_id);
+  int lookup(PageId page_id);
+  int insert(
 
-    Page outpage;
-    vd.read_page(0, &outpage);
-    for (int i = 0; i < PAGESIZE; i++) {
-      if (outpage.data[i] != i % 26 + 'a') {
-          std::cout<<"error reading"<<std::endl;
-      } 
-    }
-
-    return 0;
-}
+private:
+  std::vector<frame_desc> ht_;
+  std::size_t ht_size_; // 2*hash_size_ by default
+  std::size_t hash_size_;
+};
 
 
+#endif
